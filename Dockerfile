@@ -15,7 +15,7 @@ ARG config_dir=/config
 RUN mkdir -p $config_dir
 VOLUME $config_dir
 ENV CONFIG_VOLUME=$config_dir
-RUN pip install flask-sslify
+RUN pip install flask-talisman
 ARG username=''
 ENV WHOOGLE_USER=$username
 ARG password=''
