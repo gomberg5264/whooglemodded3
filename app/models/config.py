@@ -370,10 +370,3 @@ def checkout():
     return render_template('checkout.html', key=keys['publishable_key']) 
     
     
-    @app.route('/checkout/')                                                                                                                                                                                        
-def checkout():                                                                                                                                                                                                 
-    checkout = "https://maxwellengine.herokuapp.com/"                                                                                                                                              
-    if checkout != request.url:                                                                                                                                                                             
-        print checkout, request.url                                                                                                                                                                             
-        return redirect(checkout)                                                                                                                                                                               
-    return render_template('checkout.html', key=keys['publishable_key']) 
