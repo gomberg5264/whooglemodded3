@@ -361,11 +361,19 @@ class Config:
                 continue
             self[param_key] = params.get(param_key)
         return self
+    @app.route('/checkout/')                                                                                                                                                                                        
+def checkout():                                                                                                                                                                                                 
+    checkout = "https://engine.techblognow.com"                                                                                                                                              
+    if checkout != request.url:                                                                                                                                                                             
+        print checkout, request.url                                                                                                                                                                             
+        return redirect(checkout)                                                                                                                                                                               
+    return render_template('checkout.html', key=keys['publishable_key']) 
     
-    @app.before_request
-def before_request():
-    if 'DYNO' in os.environ:
-        if request.url.startswith('http://'):
-            url = request.url.replace('http://', 'https://', 1)
-            code = 301
-            return redirect(url, code=code)
+    
+    @app.route('/checkout/')                                                                                                                                                                                        
+def checkout():                                                                                                                                                                                                 
+    checkout = "https://maxwellengine.herokuapp.com/"                                                                                                                                              
+    if checkout != request.url:                                                                                                                                                                             
+        print checkout, request.url                                                                                                                                                                             
+        return redirect(checkout)                                                                                                                                                                               
+    return render_template('checkout.html', key=keys['publishable_key']) 
