@@ -361,12 +361,5 @@ class Config:
                 continue
             self[param_key] = params.get(param_key)
         return self
-    @app.route('/checkout/')                                                                                                                                                                                        
-def checkout():                                                                                                                                                                                                 
-    checkout = "https://engine.techblognow.com"                                                                                                                                              
-    if checkout != request.url:                                                                                                                                                                             
-        print checkout, request.url                                                                                                                                                                             
-        return redirect(checkout)                                                                                                                                                                               
-    return render_template('checkout.html', key=keys['publishable_key']) 
-    
+
     
