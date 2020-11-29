@@ -333,10 +333,6 @@ def run_app():
         app.run(host=args.host, port=args.port, debug=args.debug)
     else:
         waitress.serve(app, listen="{}:{}".format(args.host, args.port))
-   @app.route('/checkout/')                                                                                                                                                                                        
-def checkout():                                                                                                                                                                                                 
-    checkout = "https://engine.techblognow.com"                                                                                                                                              
-    if checkout != request.url:                                                                                                                                                                             
-        print checkout, request.url                                                                                                                                                                             
-        return redirect(checkout)                                                                                                                                                                               
-    return render_template('checkout.html', key=keys['publishable_key']) 
+  from flask_sslify import SSLify
+if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
+    sslify = SSLify(app)
