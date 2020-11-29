@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 COPY misc/tor/torrc /etc/tor/torrc
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN --build-arg use_https=1
 ARG config_dir=/config
 RUN mkdir -p $config_dir
 VOLUME $config_dir
