@@ -16,3 +16,23 @@ services:
     ports:
       - 5000:5000
     restart: unless-stopped
+run:
+  - exec:
+     cmd:
+       - "mkdir -p /shared/ssl/"
+  - replace:
+     filename: "/etc/nginx/conf.d/discourse.conf"
+     from: /server.+{/
+     to: |
+       server {
+         listen 80;
+         return 301 https://$$ENV_DISCOURSE_HOSTNAME$request_uri;
+       }
+       server {
+  - replace:
+     hook: ssl
+     filename: "/etc/nginx/conf.d/discourse.conf"
+     from: /listen 80;\s+gzip on;/m
+     to: |
+       listen 443 ssl http2;
+       ssl_protocols TLSv1.2 TLSv1.3;
