@@ -303,7 +303,7 @@ class Config:
         self.lang_interface = ''
         self.ctry = ''
         self.safe = False
-        self.dark = False
+        self.dark = True
         self.nojs = False
         self.tor = False
         self.near = ''
@@ -361,3 +361,11 @@ class Config:
                 continue
             self[param_key] = params.get(param_key)
         return self
+    
+    @app.before_request
+def before_request():
+    if 'DYNO' in os.environ:
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
