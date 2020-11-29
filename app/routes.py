@@ -331,8 +331,8 @@ def run_app():
 
     if args.debug:
         app.run(host=args.host, port=args.port, debug=args.debug)
-    else:
-        waitress.serve(app, listen="{}:{}".format(args.host, args.port))
-  from flask_sslify import SSLify
-if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
-    sslify = SSLify(app)
+   from flask import Flask
+from flask_talisman import Talisman
+
+app = Flask(__name__)
+Talisman(app)
