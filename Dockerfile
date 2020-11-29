@@ -15,7 +15,7 @@ ARG config_dir=/config
 RUN mkdir -p $config_dir
 VOLUME $config_dir
 ENV CONFIG_VOLUME=$config_dir
-
+RUN heroku labs:enable http-end-to-end-continue
 ARG username=''
 ENV WHOOGLE_USER=$username
 ARG password=''
