@@ -219,3 +219,11 @@ class Request:
             return self.send(base_url, query, attempt)
 
         return response
+
+    @app.before_request
+def before_request():
+    if 'DYNO' in os.environ:
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
